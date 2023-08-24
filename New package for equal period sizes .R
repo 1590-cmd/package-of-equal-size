@@ -51,7 +51,7 @@ gr1<-function(v,p){
 
 # Algorithm from paper:
 
-#  Muhammad Riaz, M. H. Tahir, Mahmood ul Hassan
+#  Muhammad Riaz, Abid khan, Mahmood ul Hassan
 #   H. M. Kashif Rasheed and Rashid Ahmed*
 
 #
