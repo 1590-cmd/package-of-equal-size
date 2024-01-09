@@ -1,4 +1,18 @@
-gr1<-function(v,p){
+  
+#################################################################################
+# Algorithm Coded with R to Generate Efficient Circular Balanced Repeated Measurements Designs and Their Useful Classes
+# for period of equal size(P)
+
+# Algorithm from paper:
+
+#  Muhammad Riaz, Mahmood ul Hassan,abid khan
+#   H. M. Kashif Rasheed and Rashid Ahmed*
+
+#
+# Coded by Riaz et al., 2021-2022 
+# Version 2.1.0  (2023-04-20)
+#################################################################################
+Designcheck<-function(v,p,i){
   #v=9
   #p=4
   #if(i<=0)stop("i must be a positive integer")
@@ -15,20 +29,20 @@ gr1<-function(v,p){
         if(i<=0)stop("i must be a positive integer")
         cat("MCSBRMD IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,"i=",i,  "AND", "P=",p, "AND ALSO RUN D=2")
       }else
-        cat("No Design IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,  "AND", "P=",p)
+        cat("Neither MCBRMD nor MCSBRMD is possible for", "V=",v,  "AND", "P=",p)
   }
-    if(v%%2==0){
-      
-      if((v-2)%%p==0){
-        i=(v-2)/p
+  if(v%%2==0){
+    
+    if((v-2)%%p==0){
+      i=(v-2)/p
+      if(i<=0)stop("i must be a positive integer")
+      cat("MCPBRMD IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,"i=",i,  "AND", "P=",p, "AND ALSO RUN D=3")
+    }else
+      if((v-1)%%p==0){
+        i=(v-1)/p
         if(i<=0)stop("i must be a positive integer")
-        cat("MCPBRMD IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,"i=",i,  "AND", "P=",p, "AND ALSO RUN D=3")
-      }else
-        if((v-1)%%p==0){
-          i=(v-1)/p
-          if(i<=0)stop("i must be a positive integer")
-          cat("MCSPRMD IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,"i=",i,  "AND", "P=",p, "AND ALSO RUN D=4")
-    }else    
+        cat("MCSPRMD IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,"i=",i,  "AND", "P=",p, "AND ALSO RUN D=4")
+      }else    
         if(v%%p==0){
           i=v/p
           if(i<=0)stop("i must be a positive integer")
@@ -39,28 +53,11 @@ gr1<-function(v,p){
             if(i<=0)stop("i must be a positive integer")
             cat("MCSBGRMD IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,"i=",i,  "AND", "P=",p, "AND ALSO RUN D=6")
           }else
-          
-      cat("No Design IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,  "AND", "P=",p)
-
+            
+            cat("No Design IS POSSIBLE IN EQUAL PERIOD SIZES FOR GIVEN", "V=",v,  "AND", "P=",p)
+    
+  }
 }
-}
-  
-#################################################################################
-# Algorithm Coded with R to Generate Efficient Circular Balanced Repeated Measurements Designs and Their Useful Classes
-# for period of equal size(P)
-
-# Algorithm from paper:
-
-#  Muhammad Riaz, Abid khan, Mahmood ul Hassan
-#   H. M. Kashif Rasheed and Rashid Ahmed*
-
-#
-# Coded by Riaz et al., 2021-2022 
-# Version 2.1.0  (2022-04-20)
-#################################################################################
-
-
-
 
 ################################################################
 # Division of adjusted A in i groups to get the set(s) of shifts
@@ -120,9 +117,8 @@ delmin<-function(z){
 
 #################################################################################
 # Selection of adjusted A and the set(s) of shifs to obtain Circular Balanced, 
-#Strongly Balanced, partialy balanced-I, partialy balanced-II, Weakly Balanced,
-#strongly generalized balanced-I, strongly partialy balanced-I, strongly partialy balanced-II  
-# Repeated Measurements Designs for period of equal size. 
+#Strongly Balanced, partialy balanced, strongly partialy balanced, Weakly Balanced,
+#strongly generalized balanced Repeated Measurements Designs for period of equal size. 
 #################################################################################
 
 # D=1: Minimal CBRMDs 
@@ -149,7 +145,7 @@ CGSBRMD_equalsize<-function(v,p,i,D=1){
     row <- paste(rep("=", 51), collapse = "")
     cat(row, "\n")
     cat("Following are required sets of shifts to obtain the 
-        minimal CBRMDs,CSBRMDs and  CWBRMDs for", "v=" ,object[[3]][1], "and","P=",object[[3]][2], "\n")
+minimal CBRMDs,CSBRMDs and  CWBRMDs for", "v=" ,object[[3]][1], "and","P=",object[[3]][2], "\n")
     row <- paste(rep("=", 51), collapse = "")
     cat(row, "\n")
     print(object$S[[1]])
@@ -279,15 +275,15 @@ design_CGSBRMD<-function(H){
 
 
 # example#
-(H<-gr1(v=25,p=5))
+(H<-Designcheck(v=24,p=5))
 
 # example#1
-(H<-CGSBRMD_equalsize(v=25,p=5,i=5,D=2))
+(H<-CGSBRMD_equalsize(v=24,p=5,i=5,D=6))
 H$G
 (D<-design_CGSBRMD(H))
 
 # example #2
-(H<-CGSBRMD_equalsize(v=45,p=7,i=5,D=2))
+(H<-CGSBRMD_equalsize(v=21,p=5,i=4,D=1))
 H$G
 design_CGSBRMD(H)
 
