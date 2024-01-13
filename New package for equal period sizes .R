@@ -1,6 +1,7 @@
   
 #################################################################################
-# Algorithm Coded with R to Generate Efficient Circular Balanced Repeated Measurements Designs and Their Useful Classes
+# An Easy Method to Construct Classes of Circular Repeated 
+# Measurements Designs, Efficient to Control Carry Over Effects
 # for period of equal size(P)
 
 # Algorithm from paper:
